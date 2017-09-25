@@ -149,11 +149,11 @@ namespace Assets.Scripts.Utilities.MessageHandler
             SortMessagesByTime();
         }
 
-        public void QueueMessage(Message msg, float delay = 0)
+        public void QueueMessage(Message msg, float delayInSeconds = 0)
         {
-            if (delay > 0)
+            if (delayInSeconds > 0)
             {
-                msg.MessageTime = Time.time + delay;
+                msg.MessageTime = Time.time + delayInSeconds;
                 m_messageListQueue.Add(msg);
             }
             else

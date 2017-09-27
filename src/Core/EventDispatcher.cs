@@ -38,8 +38,6 @@ namespace Assets.Scripts.Utilities.MessageHandler
             MessageBind bind = GetOrCreateBind(listener);
             Debug.Assert(bind.MessageTypes.Contains(messageID) == false, "Listener " + listener.GetType().Name + " already has bind with message type " + messageID);
             bind.MessageTypes.Add(messageID);
-
-            OnBindsUpdated();
         }
 
         public void UnBindListenerFromMessage(IMessageListener listener, int messageID)
@@ -56,14 +54,8 @@ namespace Assets.Scripts.Utilities.MessageHandler
             Debug.Assert(HasBind(listener), "Listener does not have any binds associated with it");
             MessageBind bind = GetOrCreateBind(listener);
             m_messageBinds.Remove(bind);
-
-            OnBindsUpdated();
         }
 
-        private void OnBindsUpdated()
-        {
-            SortBindsByPriority();
-        }
 
 
         private bool HasBind(IMessageListener listener)
@@ -182,25 +174,6 @@ namespace Assets.Scripts.Utilities.MessageHandler
             m_messageList.Sort(SortByTime);
         }
 
-        private void SortBindsByPriority()
-        {
-            m_messageBinds.Sort(SortByPriority);
-        }
-
-        private int SortByPriority(MessageBind a, MessageBind b)
-        {
-            if (a.Listener.ListenerPriority < b.Listener.ListenerPriority)
-            {
-                return -1;
-            }
-            else
-         if (a.Listener.ListenerPriority > b.Listener.ListenerPriority)
-            {
-                return 1;
-            }
-
-            return 0;
-        }
 
         private int SortByTime(Message a, Message b)
         {

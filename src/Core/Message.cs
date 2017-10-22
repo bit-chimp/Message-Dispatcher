@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.Scripts.Utilities.MessageHandler
+namespace btcp.MessageHandler.src
 {
     public class Message
     {
@@ -11,13 +11,13 @@ namespace Assets.Scripts.Utilities.MessageHandler
 
         private Dictionary<string, object> m_valueDict;
 
-        private int m_messageID;
+        private object m_messageID;
         private float m_messageDelay;
-        public int MessageID { get { return m_messageID; } private set { m_messageID = value; } }
+        public object MessageID { get { return m_messageID; } private set { m_messageID = value; } }
         public float MessageTime { get { return m_messageDelay; } set { m_messageDelay = value; } }
 
 
-        public Message(int id)
+        public Message(object id)
         {
             m_messageID = id;
 

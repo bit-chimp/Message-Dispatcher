@@ -1,4 +1,4 @@
-namespace Assets.Scripts.Utilities.MessageHandler
+namespace btcp.MessageHandler.src
 {
 
     public interface IMessageListener

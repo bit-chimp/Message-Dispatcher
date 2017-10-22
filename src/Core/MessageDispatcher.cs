@@ -2,25 +2,10 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.Scripts.Utilities.MessageHandler
+namespace btcp.MessageHandler.src
 {
     public class MessageDispatcher
     {
-
-        private static MessageDispatcher m_instance;
-        public static MessageDispatcher Instance
-        {
-            get
-            {
-                if (m_instance == null)
-                {
-                    m_instance = new MessageDispatcher();
-                }
-
-                return m_instance;
-            }
-        }
-
         private List<Message> m_messageList;
         private List<Message> m_messageListQueue;
 
@@ -33,7 +18,7 @@ namespace Assets.Scripts.Utilities.MessageHandler
             m_messageBinds = new List<MessageBind>();
         }
 
-        public void BindListener(IMessageListener listener, int messageID)
+        public void BindListener(IMessageListener listener, object messageID)
         {
             MessageBind bind = GetOrCreateBind(listener);
             Debug.Assert(bind.MessageTypes.Contains(messageID) == false, "Listener " + listener.GetType().Name + " already has bind with message type " + messageID);
@@ -196,16 +181,16 @@ namespace Assets.Scripts.Utilities.MessageHandler
         {
 
             private IMessageListener m_listener;
-            private List<int> m_messageTypes;
+            private List<object> m_messageTypes;
 
             public IMessageListener Listener { get { return m_listener; } private set { m_listener = value; } }
-            public List<int> MessageTypes { get { return m_messageTypes; } set { m_messageTypes = value; } }
+            public List<object> MessageTypes { get { return m_messageTypes; } set { m_messageTypes = value; } }
 
             public MessageBind(IMessageListener listener)
             {
                 Listener = listener;
 
-                m_messageTypes = new List<int>();
+                m_messageTypes = new List<object>();
             }
         }
 
